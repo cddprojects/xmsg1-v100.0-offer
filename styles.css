@@ -175,6 +175,37 @@ p { margin: 0 0 1rem; }
 .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.2rem 0 0.8rem; }
 .fine { color: var(--soft); font-size: 0.9rem; }
 
+.hero-photo { position: relative; }
+.hero-photo img {
+  width: 100%;
+  height: 540px;
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 28px;
+}
+.float-card {
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  background: white;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 0.95rem 1rem 0.8rem;
+}
+.float-card strong {
+  display: block;
+  font-size: 1.65rem;
+  letter-spacing: -0.04em;
+}
+.role-photo, .step-photo, .frame-photo {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.role-photo { height: 156px; margin-bottom: 0.85rem; }
+.step-photo { height: 148px; margin-bottom: 0.9rem; }
+.frame-photo { height: 440px; border-radius: 24px; }
 .pay-panel {
   background: white;
   border: 1px solid var(--line);
@@ -276,7 +307,7 @@ section { padding: 4.2rem 0; scroll-margin-top: calc(var(--header) + 0.4rem); }
   text-decoration: none;
 }
 
-.steps { grid-template-columns: repeat(3, 1fr); }
+.steps { grid-template-columns: repeat(3, 1fr); list-style: none; margin: 0; padding: 0; }
 .step, .limit, .panel, .confirm {
   background: white;
   border: 1px solid var(--line);
@@ -304,6 +335,8 @@ section { padding: 4.2rem 0; scroll-margin-top: calc(var(--header) + 0.4rem); }
   position: relative;
   font-weight: 600;
 }
+.check-list + .button { margin-top: 1.15rem; }
+
 .check-list li::before {
   content: "";
   position: absolute;
@@ -399,6 +432,9 @@ details p { margin: 0.55rem 0 0.15rem; color: var(--muted); }
 
 @media (max-width: 980px) {
   .hero-grid, .split, .enquiry, .footer-grid, .steps, .roles, .limits { grid-template-columns: 1fr; }
+  .hero-photo img { height: 320px; }
+  .float-card { position: static; margin-top: 0.85rem; }
+  .frame-photo { height: 280px; }
   .nav-toggle { display: inline-flex; }
   .nav {
     display: none;
