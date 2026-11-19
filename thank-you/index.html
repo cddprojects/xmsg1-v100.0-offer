@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Send your enquiry — Pogo Hire</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="../">Pogo <span>Hire</span></a>
+      <a class="button small" href="../#enquire">Back to the form</a>
+    </div>
+  </header>
+  <main id="main" class="legal">
+    <div class="wrap prose">
+      <p class="eyebrow">Not sent yet</p>
+      <h1>Open the email, then send it.</h1>
+      <p>Your note is stored only in this browser. Pogo Hire has not received it. Use the button to open your mail app with the enquiry addressed to contact@pogohire.com, then send the message yourself.</p>
+      <div class="confirm" id="ready">
+        <p><strong id="subject-line"></strong></p>
+        <pre id="body-preview"></pre>
+        <div class="actions">
+          <a class="button" id="send-link" href="mailto:contact@pogohire.com">Open email</a>
+          <button class="button secondary" id="copy-note" type="button">Copy the note</button>
+        </div>
+        <p class="fine" id="copy-status" role="status"></p>
+      </div>
+      <div class="confirm" id="empty" hidden>
+        <p>There is no enquiry saved in this browser. Go back to the form, or write to <a href="mailto:contact@pogohire.com?subject=Singapore%20offer%20enquiry">contact@pogohire.com</a> with the subject “Singapore offer enquiry”.</p>
+        <p><a class="button" href="../#enquire">Return to the form</a></p>
+      </div>
+      <h2>After you send it</h2>
+      <p>If a consultant sees a possible fit, the team aims to reply by email or WhatsApp within 1–2 business days. A sent email is still not a job offer. If nothing fits, that is also a complete answer.</p>
+      <p><button class="button secondary" id="clear-note" type="button">Clear this note on my device</button></p>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="../">Home</a> <a href="../privacy-policy/">Privacy policy</a> <a href="../terms-of-service/">Terms</a> <a href="../pdpa-notice/">PDPA notice</a></p>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var ready = document.getElementById("ready");
+      var empty = document.getElementById("empty");
+      var raw = null;
+      try { raw = sessionStorage.getItem("pogoEnquiryV3"); } catch (err) { raw = null; }
+      var data = null;
+      try { data = raw ? JSON.parse(raw) : null; } catch (err) { data = null; }
+
+      if (!data || !data.subject || !data.body) {
+        ready.hidden = true;
+        empty.hidden = false;
+        return;
+      }
+
+      document.getElementById("subject-line").textContent = data.subject;
+      document.getElementById("body-preview").textContent = data.body;
+      document.getElementById("send-link").href = "mailto:contact@pogohire.com?subject=" +
+        encodeURIComponent(data.subject) + "&body=" + encodeURIComponent(data.body);
+
+      document.getElementById("copy-note").addEventListener("click", function () {
+        var text = data.subject + "\n\n" + data.body;
+        var status = document.getElementById("copy-status");
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            status.textContent = "Copied. Paste it into an email to contact@pogohire.com if the mail app did not open.";
+          }).catch(function () {
+            status.textContent = "Copy was blocked. Select the note above and copy it manually.";
+          });
+        } else {
+          status.textContent = "Select the note above and copy it manually.";
+        }
+      });
+
+      document.getElementById("clear-note").addEventListener("click", function () {
+        try { sessionStorage.removeItem("pogoEnquiryV3"); } catch (err) {}
+        ready.hidden = true;
+        empty.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>
