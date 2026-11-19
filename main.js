@@ -66,13 +66,13 @@
 
     var errors = [];
     var checks = [
-      { id: "name", bad: form.name.value.trim().length < 2, message: "Enter your name." },
-      { id: "email", bad: !validEmail(form.email.value.trim()), message: "Enter a valid email address." },
-      { id: "whatsapp", bad: !validMobile(form.whatsapp.value.trim()), message: "Enter a Singapore mobile number." },
-      { id: "residency", bad: form.residency.value === "", message: "Select Citizen or PR." },
-      { id: "hours", bad: form.hours.value === "", message: "Select the hours you can sell." },
-      { id: "band", bad: form.band.value === "", message: "Choose the pay band you want to discuss." },
-      { id: "skill", bad: form.skill.value === "", message: "Choose a role, or say you are not sure yet." }
+      { id: "name", bad: form.name.value.trim().length < 2, message: "Please enter your name." },
+      { id: "email", bad: !validEmail(form.email.value.trim()), message: "Please enter a valid email address." },
+      { id: "whatsapp", bad: !validMobile(form.whatsapp.value.trim()), message: "Please enter a Singapore mobile number." },
+      { id: "residency", bad: form.residency.value === "", message: "Please select Citizen or PR." },
+      { id: "hours", bad: form.hours.value === "", message: "Please let us know how many hours suit you." },
+      { id: "band", bad: form.band.value === "", message: "Please choose a rate range." },
+      { id: "skill", bad: form.skill.value === "", message: "Please choose a role, or let us guide you." }
     ];
 
     checks.forEach(function (item) {
@@ -81,8 +81,8 @@
       if (item.bad) errors.push(item.message);
     });
 
-    [["eligible", "Confirm that you are a Citizen or PR aged 25 or above."],
-      ["consent", "Confirm that we may use your details for this enquiry."]].forEach(function (pair) {
+    [["eligible", "Please confirm your eligibility to continue."],
+      ["consent", "Please give consent so we can review your application."]].forEach(function (pair) {
       var input = form.querySelector("#" + pair[0]);
       var field = input.closest(".check");
       setInvalid(field, !input.checked);
@@ -101,30 +101,30 @@
     summary.textContent = "";
 
     var lines = [
-      "Paid hours enquiry",
+      "Remote role application",
       "",
       "Name: " + form.name.value.trim(),
       "Email: " + form.email.value.trim(),
       "WhatsApp: " + form.whatsapp.value.trim(),
       "Residency: " + form.residency.value,
-      "Hours you can sell each week: " + form.hours.value,
-      "Pay band requested: " + form.band.value,
+      "Hours per week: " + form.hours.value,
+      "Preferred hourly rate: " + form.band.value,
       "Role: " + form.skill.value,
       "Note: " + (form.note.value.trim() || "None"),
       "",
-      "I confirm I am a Singapore Citizen or PR, aged 25 or above, and legally allowed to work in Singapore.",
-      "I agree to Pogo Hire using these details to assess this enquiry and to contact me."
+      "I confirm I am a Singapore Citizen or PR, aged 25 or above, and eligible to work in Singapore.",
+      "I agree to Pogo Hire using these details to review my application and contact me."
     ];
 
     var payload = {
-      subject: "Paid hours enquiry — " + form.name.value.trim(),
+      subject: "Remote role application — " + form.name.value.trim(),
       body: lines.join("\n")
     };
 
     try {
       sessionStorage.setItem("pogoEnquiryV3", JSON.stringify(payload));
     } catch (err) {
-      summary.textContent = "This browser blocked local storage. Email contact@pogohire.com directly.";
+      summary.textContent = "Your browser didn’t let us save the form. Please email contact@pogohire.com and we’ll help you from there.";
       summary.classList.add("show");
       return;
     }
