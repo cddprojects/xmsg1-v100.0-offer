@@ -20,6 +20,15 @@
     });
   }
 
+  document.querySelectorAll("[data-band]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      var band = document.getElementById("band");
+      if (!band) return;
+      band.value = link.getAttribute("data-band");
+      band.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+  });
+
   var form = document.getElementById("enquire-form");
   if (!form) return;
 
@@ -61,8 +70,9 @@
       { id: "email", bad: !validEmail(form.email.value.trim()), message: "Enter a valid email address." },
       { id: "whatsapp", bad: !validMobile(form.whatsapp.value.trim()), message: "Enter a Singapore mobile number." },
       { id: "residency", bad: form.residency.value === "", message: "Select Citizen or PR." },
-      { id: "hours", bad: form.hours.value === "", message: "Select the hours you can give." },
-      { id: "skill", bad: form.skill.value === "", message: "Select a skill, or “Not sure yet”." }
+      { id: "hours", bad: form.hours.value === "", message: "Select the hours you can sell." },
+      { id: "band", bad: form.band.value === "", message: "Choose the pay band you want to discuss." },
+      { id: "skill", bad: form.skill.value === "", message: "Choose a role, or say you are not sure yet." }
     ];
 
     checks.forEach(function (item) {
@@ -91,14 +101,15 @@
     summary.textContent = "";
 
     var lines = [
-      "Singapore offer enquiry",
+      "Paid hours enquiry",
       "",
       "Name: " + form.name.value.trim(),
       "Email: " + form.email.value.trim(),
       "WhatsApp: " + form.whatsapp.value.trim(),
       "Residency: " + form.residency.value,
-      "Hours in a normal week: " + form.hours.value,
-      "Skill to practise: " + form.skill.value,
+      "Hours you can sell each week: " + form.hours.value,
+      "Pay band requested: " + form.band.value,
+      "Role: " + form.skill.value,
       "Note: " + (form.note.value.trim() || "None"),
       "",
       "I confirm I am a Singapore Citizen or PR, aged 25 or above, and legally allowed to work in Singapore.",
@@ -106,7 +117,7 @@
     ];
 
     var payload = {
-      subject: "Singapore offer enquiry — " + form.name.value.trim(),
+      subject: "Paid hours enquiry — " + form.name.value.trim(),
       body: lines.join("\n")
     };
 
