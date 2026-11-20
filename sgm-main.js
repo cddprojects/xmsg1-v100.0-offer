@@ -128,7 +128,7 @@
       "Note: " + (form.note.value.trim() || "None"),
       "",
       "I confirm I am a Singapore Citizen or PR, aged 25 or above, and eligible to work in Singapore.",
-      "I agree to Pogo Hire using these details to review my application and contact me."
+      "I agree to Opty Quest using these details to review my application and contact me."
     ];
 
     var payload = {
@@ -137,9 +137,9 @@
     };
 
     try {
-      sessionStorage.setItem("pogoEnquiryV3", JSON.stringify(payload));
+      sessionStorage.setItem("optyEnquiryV3", JSON.stringify(payload));
     } catch (err) {
-      summary.textContent = "Your browser didn’t let us save the form. Please email contact@pogohire.com and we’ll help you from there.";
+      summary.textContent = "Your browser didn’t let us save the form. Please email contact@optyquest.com and we’ll help you from there.";
       summary.classList.add("show");
       return;
     }

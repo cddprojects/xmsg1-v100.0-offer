@@ -88,6 +88,8 @@ a:hover { color: var(--blue-dark); }
 
 .nav-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
   background: white;
   border-radius: 999px;
@@ -95,6 +97,7 @@ a:hover { color: var(--blue-dark); }
   padding: 0 0.95rem;
   font: inherit;
   font-weight: 600;
+  line-height: 1;
 }
 
 .nav {

@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Send your enquiry — Pogo Hire</title>
+  <title>Send your enquiry — Opty Quest</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon1.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="logo" href="../">Pogo <span>Hire</span></a>
+      <a class="logo" href="../">Opty <span>Quest</span></a>
       <a class="button small" href="../#enquire">Back to the form</a>
     </div>
   </header>
@@ -23,18 +23,18 @@
     <div class="wrap prose">
       <p class="eyebrow">One last step</p>
       <h1>Almost done. Just send the email.</h1>
-      <p>We’ve prepared your application below. Tap “Open email” to send it to contact@pogohire.com from your mail app. Until then, it’s saved only in this browser.</p>
+      <p>We’ve prepared your application below. Tap “Open email” to send it to contact@optyquest.com from your mail app. Until then, it’s saved only in this browser.</p>
       <div class="confirm" id="ready">
         <p><strong id="subject-line"></strong></p>
         <pre id="body-preview"></pre>
         <div class="actions">
-          <a class="button" id="send-link" href="mailto:contact@pogohire.com">Open email</a>
+          <a class="button" id="send-link" href="mailto:contact@optyquest.com">Open email</a>
           <button class="button secondary" id="copy-note" type="button">Copy the note</button>
         </div>
         <p class="fine" id="copy-status" role="status"></p>
       </div>
       <div class="confirm" id="empty" hidden>
-        <p>We couldn’t find a saved application in this browser. You can head back to the form, or write to us at <a href="mailto:contact@pogohire.com?subject=Remote%20role%20application">contact@pogohire.com</a> with the subject “Remote role application”.</p>
+        <p>We couldn’t find a saved application in this browser. You can head back to the form, or write to us at <a href="mailto:contact@optyquest.com?subject=Remote%20role%20application">contact@optyquest.com</a> with the subject “Remote role application”.</p>
         <p><a class="button" href="../#enquire">Return to the form</a></p>
       </div>
       <h2>What happens next</h2>
@@ -52,7 +52,7 @@
       var ready = document.getElementById("ready");
       var empty = document.getElementById("empty");
       var raw = null;
-      try { raw = sessionStorage.getItem("pogoEnquiryV3"); } catch (err) { raw = null; }
+      try { raw = sessionStorage.getItem("optyEnquiryV3"); } catch (err) { raw = null; }
       var data = null;
       try { data = raw ? JSON.parse(raw) : null; } catch (err) { data = null; }
 
@@ -64,7 +64,7 @@
 
       document.getElementById("subject-line").textContent = data.subject;
       document.getElementById("body-preview").textContent = data.body;
-      document.getElementById("send-link").href = "mailto:contact@pogohire.com?subject=" +
+      document.getElementById("send-link").href = "mailto:contact@optyquest.com?subject=" +
         encodeURIComponent(data.subject) + "&body=" + encodeURIComponent(data.body);
 
       document.getElementById("copy-note").addEventListener("click", function () {
@@ -72,7 +72,7 @@
         var status = document.getElementById("copy-status");
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(function () {
-            status.textContent = "Copied. Paste it into an email to contact@pogohire.com if the mail app did not open.";
+            status.textContent = "Copied. Paste it into an email to contact@optyquest.com if the mail app did not open.";
           }).catch(function () {
             status.textContent = "Copy was blocked. Select the note above and copy it manually.";
           });
@@ -82,7 +82,7 @@
       });
 
       document.getElementById("clear-note").addEventListener("click", function () {
-        try { sessionStorage.removeItem("pogoEnquiryV3"); } catch (err) {}
+        try { sessionStorage.removeItem("optyEnquiryV3"); } catch (err) {}
         ready.hidden = true;
         empty.hidden = false;
       });
