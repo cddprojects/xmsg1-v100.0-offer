@@ -29,6 +29,21 @@
     });
   });
 
+  var estHours = document.getElementById("est-hours");
+  var estRate = document.getElementById("est-rate");
+  if (estHours && estRate) {
+    var estWeek = document.getElementById("est-week");
+    var estMonth = document.getElementById("est-month");
+    var updateEstimate = function () {
+      var weekly = Number(estHours.value) * Number(estRate.value);
+      estWeek.textContent = "S$" + weekly.toLocaleString("en-SG");
+      estMonth.textContent = "S$" + Math.round(weekly * 52 / 12).toLocaleString("en-SG");
+    };
+    estHours.addEventListener("change", updateEstimate);
+    estRate.addEventListener("change", updateEstimate);
+    updateEstimate();
+  }
+
   var form = document.getElementById("enquire-form");
   if (!form) return;
 
